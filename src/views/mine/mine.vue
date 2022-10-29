@@ -81,6 +81,7 @@ import HeaderView from '../../components/header'
 
         data() {
 			return {
+                id: undefined,
                 list: [],
                 show: false,
                 voteDetail: '',
@@ -99,6 +100,7 @@ import HeaderView from '../../components/header'
                     page: 1,
                     page_size: 100,
                     wx_id: _this.useopenid,
+                    types: _this.id,
                 }
                 axios.post('/list', postData).then(res => {
                     console.log('获取用户数据')
@@ -249,14 +251,18 @@ import HeaderView from '../../components/header'
             },
 		},
         mounted() {
-            this.getCustomerList()
+
+            // console.log(id,name)
+        },
+        beforeMount() {
             const {app:{_route:{query:{id,name}}}} = router
             this.name = name
+            this.id = id
             this.titleName = name + '累计票数'
-            console.log(id,name)
-        },
+            this.getCustomerList()
 
-	}
+        }
+    }
 </script>
 
 <style scoped="scoped" lang="less">
