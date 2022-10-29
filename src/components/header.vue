@@ -12,7 +12,10 @@
 export default {
     name: "header",
     props: ['statistics', 'name', 'titleName'],
-
+    methods: {
+        getFullData(num) {
+        }
+    }
 }
 </script>
 

@@ -165,7 +165,7 @@
                         <div class="card__top">
                             <div>
                                 <span class="no">NO.{{ index+1 }}</span>
-                                <span class="name">{{ item.name }}</span>
+                                <span class="name">作品{{ item.type }}-{{item.id}}</span>
                             </div>
                             <div>({{ item.vote }}票)</div>
                         </div>
@@ -216,7 +216,7 @@
 <script>
 
 import axios from "../utils/request.js"
-
+import {publicMethod} from '../utils/pubilc'
 import {isWXBrowser, getWechatCode, getUrlCode, isWechat} from "../utils/common";
 // import rankView from '../rank/rank'
 
@@ -880,7 +880,7 @@ export default {
         background: rgba(129, 167, 255, 0.16);
         font-family: 'PingFang SC';
         font-style: normal;
-        font-weight: 500;
+        font-weight: 700;
         bottom: 0;
         border-radius: 50%;
         display: flex;

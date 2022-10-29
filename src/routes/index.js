@@ -4,7 +4,7 @@ export default [
 		path: '/home',
 		name: 'home',
 		meta: {
-			title: '快来为您喜欢的“嘉定区规划展示馆LOGO设计方案”投票'
+			title: '手指点一点，你来决定嘉定区规划展示馆的LOGO'
 		},
 		component: resolve => require(['../views/home/home.vue'], resolve) //按需加载，只有在进入该页面的时候加载，并不会启动项目全部加载
 	},
@@ -12,7 +12,7 @@ export default [
 		path: '/mine/:id?/:name?',
 		name: 'mine',
 		meta: {
-			title: '我的'
+			title: '手指点一点，你来决定嘉定区规划展示馆的LOGO'
 		},
 		component: resolve => require(['../views/mine/mine.vue'], resolve)
 	},
@@ -20,7 +20,7 @@ export default [
 		path: '/rank',
 		name: 'rank',
 		meta: {
-			title: 'rank'
+			title: '手指点一点，你来决定嘉定区规划展示馆的LOGO'
 		},
 		component: resolve => require(['../views/rank/rank.vue'], resolve)
 	},
