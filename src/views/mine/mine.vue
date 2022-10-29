@@ -1,6 +1,8 @@
 <template>
     <!-- 内容 -->
     <div class="main">
+        <header-view v-bind="{statistics, name, titleName}"/>
+
         <div class="main-content" v-for="(item,index) in list" :key="item.id">
             <div class="main-li">
                 <div class="main-top" @click="onDetails(item)">
@@ -72,9 +74,12 @@
 <script>
 import {router} from '../../main'
 import axios from "../../../utils/request";
+import HeaderView from '../../components/header'
 
 	export default {
-		data() {
+        components: {HeaderView},
+
+        data() {
 			return {
                 list: [],
                 show: false,
@@ -82,7 +87,9 @@ import axios from "../../../utils/request";
                 checkList: [],
                 useopenid: '',
                 rankShow: false,
-
+                statistics: 0,
+                name: '',
+                titleName: '', // header标题
             }
 		},
 		methods:{
@@ -107,8 +114,7 @@ import axios from "../../../utils/request";
                             for (let i = 0; i < dataList.length; i++) {
                                 dataList[i].is_checked = false;
                             }
-                            _this.statistics.cysj = useData.data.count
-                            _this.statistics.zps = useData.data.sum > 9999 ? (Math.trunc(useData.data.sum / 1000) / 10).toFixed(1) + 'w' : useData.data.sum
+                            _this.statistics = useData.data.sum > 9999 ? (Math.trunc(useData.data.sum / 1000) / 10).toFixed(1) + 'w' : useData.data.sum
 
                         }
                     }
@@ -244,6 +250,10 @@ import axios from "../../../utils/request";
 		},
         mounted() {
             this.getCustomerList()
+            const {app:{_route:{query:{id,name}}}} = router
+            this.name = name
+            this.titleName = name + '累计票数'
+            console.log(id,name)
         },
 
 	}

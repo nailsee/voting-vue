@@ -58,10 +58,7 @@
             </div>
         </div>
 
-        <div class="vote_time_wrap_two">
-            <p class="vote_time_wrap_tp">累计票数</p>
-            <p>{{ statistics.zps }}</p>
-        </div>
+
         <!--  系列-->
 
         <!-- 内容 -->
@@ -691,7 +688,6 @@ export default {
         justify-content: center;
         border: 1px solid #DCDFE6;
     }
-
     .search-btn {
         right: 48px;
         border-right: 1px solid #DCDFE6 !important;
@@ -702,9 +698,7 @@ export default {
     width: 96%;
     margin: 0 auto;
     box-sizing: border-box;
-    padding-bottom: 20px;
     overflow: hidden;
-
     & .main-content {
         width: 43%;
         padding: 3px;
