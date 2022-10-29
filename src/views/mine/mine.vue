@@ -6,7 +6,7 @@
         <div class="main-content" v-for="(item,index) in list" :key="item.id">
             <div class="main-li">
                 <div class="main-top" @click="onDetails(item)">
-                    <p class="am-badge-danger">{{ item.id }}号</p>
+                    <p class="am-badge-danger">{{ item.type }}-{{ item.id }}</p>
                     <p style="color: #5087a2;">{{ item.vote }}票</p>
                 </div>
 
@@ -54,7 +54,7 @@
         <van-popup closeable v-model="show">
             <div class="votedet_wrap">
                 <div class="votedet_top">
-                    <div class="votedet_tleft">作品<span>{{ voteDetail.id }}</span></div>
+                    <div class="votedet_tleft">作品<span>{{ voteDetail.type }}-{{ voteDetail.id }}</span></div>
                     <div class="votedet_tright">
                         {{ voteDetail.vote }}
                         <div class="votedet_trd">票</div>
@@ -169,8 +169,8 @@ import HeaderView from '../../components/header'
                     }
                 }
                 for (let i = 0; i < useList.length; i++) {
-                    if (check_num >= 3) {
-                        this.$toast.success('每次最多投3个作品');
+                    if (check_num >= 2) {
+                        this.$toast.success('每次最多投2个作品');
                     } else {
                         if (useList[i].id == data.id) {
                             useList[i].is_checked = true;
@@ -259,6 +259,7 @@ import HeaderView from '../../components/header'
             this.name = name
             this.id = id
             this.titleName = name + '累计票数'
+            this.useopenid = localStorage.getItem('useopenid')
             this.getCustomerList()
 
         }

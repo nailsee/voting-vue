@@ -15,19 +15,28 @@
         </div>
         <!-- 统计 -->
         <div class="vote_title_top">
-            <div class="vote_title_t01">快来为您喜欢的“嘉定区规划展</div>
-            <div class="vote_title_t01">示馆LOGO设计方案”投票</div>
+            <div class="vote_title_t01">手指点一点，你来决定嘉定区
+                 </div>
+            <div class="vote_title_t01">规划展示馆的LOGO</div>
         </div>
 
         <div class="vote_title_desc">
-            “嘉定区规划展示馆LOGO设计方案征集”活动自8月26日启动以来，收到来自社会各界人士的参赛作品。
-            经各组别推荐，初审，组委会初步评议，参赛作品进入本次网络投票阶段 (作品排序不代表排名)。
+            “嘉定区规划展示馆LOGO设计方案征集”活动自8月26日启动以来，收到来自社会各界人士的广泛关注与踊跃参与，至投稿截止日共计收到近百份投稿作品，经初步遴选其中62份符合评选要求，将参与本次网络投票（作品排序不代表排名）。
+<!--            投票规则:-->
+<!--            每人可参与投票一次；-->
+<!--            参与投票作品分为四个系列，-->
+<!--            每个系列最多可投2个作品，-->
+<!--            共计最多可投8个作品。-->
+<!--            “嘉定区规划展示馆LOGO设计方案征集”活动自8月26日启动以来，收到来自社会各界人士的参赛作品。-->
+<!--            经各组别推荐，初审，组委会初步评议，参赛作品进入本次网络投票阶段 (作品排序不代表排名)。-->
         </div>
 
         <div class="vote_rule_wrap">
             <div class="vote_rule_p">投票规则:</div>
-            <div class="vote_rule_p">每人可参与投票一次</div>
-            <div class="vote_rule_p">每次最多投3个作品</div>
+            <div class="vote_rule_p">每人可参与投票一次；</div>
+            <div class="vote_rule_p">参与投票作品分为四个系列，</div>
+            <div class="vote_rule_p">每个系列最多可投2个作品，</div>
+            <div class="vote_rule_p">共计最多可投8个作品。</div>
             <div class="rank" @click="handleRank">排名</div>
         </div>
 
@@ -141,7 +150,7 @@
         </van-popup>
         <el-drawer
             :visible.sync="rankShow"
-            title="所有排名"
+            :title="name +'排名'"
             class="card-body"
             size="95%"
             direction="btt"
@@ -227,22 +236,7 @@ export default {
             searchData: undefined,
             currentPage: 1, //当前页码
             list: [
-                // {
-                // 	num: 27,
-                // 	name: '赛唯洗衣生活馆',
-                // 	img: require('../../../static/images/list.jpeg'),
-                // 	flag: false,
-                // 	number: 7469
-                // },
-                //{
-                // file_url: "https://api.chuguji.com/uploads/images/1.jpg"
-                // id: 1
-                // intro: "1.标志内部象“嘉”，代表嘉定区；\r\n2.标志象展馆的俯视图，体现规划展示的特色，表达规划展示、科普教育、文化交流的职能；\r\n3.绿蓝渐变体现创新活力城，宜居新嘉定的主题。\r\n字体标准：\r\n中文：三极素纤简\r\n英文∶arial narrow∶"
-                // is_vote: false
-                // name: "1号作品"
-                // type: ""
-                // vote: 1
-                //}
+
             ],
             isVotes: [],
             searchList: [], //搜索的数据
@@ -260,17 +254,18 @@ export default {
             rankShow: false,
             rankList: [], // 排名列表
             rankVote: 0,
-            rankLoading: false
+            rankLoading: false,
+            id: undefined,
+            name: '所有'
 
         }
     },
     methods: {
-        handleRank(type) {
-            console.log(type,'type')
+        handleRank() {
             try {
                 this.rankLoading = true
                 this.rankShow = true
-                axios.post('/typeRank',{type}).then(res => {
+                axios.post('/typeRank',{types: this.id}).then(res => {
                     console.log(res.data)
                     if(res.data.code == 0) {
                         this.rankList = res.data.data;
@@ -497,6 +492,7 @@ export default {
                         if (useData.code == 0) {
                             // let useopenid = useData.data.openid;
                             this.useopenid = useData.data.openid;
+                            localStorage.setItem('useopenid', useData.data.openid)
                             this.getCustomerList();
                             // this.setNote(useopenid, ids);
                         } else {
@@ -582,13 +578,25 @@ export default {
         }
     },
     created() {
-        // if (isWXBrowser) {
-        // 	getWechatCode();
-        // }
+
     },
     destroyed() {
         clearInterval()
-    }
+    },
+    watch:{
+        $route(to,from){
+            if(!to.query.id) {
+                this.id = undefined
+                this.name = '所有'
+            }else {
+                this.id = to.query.id
+                this.name = to.query.name
+            }
+
+            // this.$forceUpdate()
+            console.log(to,to.query,this.id,this.name,'tttttt','----');
+        }
+    },
 }
 </script>
 
@@ -842,6 +850,7 @@ export default {
     font-size: 14px;
     line-height: 20px;
     color: #78a2b7;
+    text-indent: 2em;
 }
 
 .vote_rule_wrap {
