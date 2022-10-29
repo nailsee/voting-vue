@@ -9,7 +9,7 @@ export default [
 		component: resolve => require(['../views/home/home.vue'], resolve) //按需加载，只有在进入该页面的时候加载，并不会启动项目全部加载
 	},
 	{
-		path: '/mine',
+		path: '/mine/:id?',
 		name: 'mine',
 		meta: {
 			title: '我的'

@@ -35,7 +35,7 @@ Vue.use(VueRouter)
 Vue.use(VueCookies)
 Vue.component('wTab', Tab) //全局组件注册
 
-const router = new VueRouter({
+export const router = new VueRouter({
 	mode: 'hash', //process.env.NODE_ENV === 'production' ? 'history' : 'hash'
 	base: '/',
 	linkActiveClass: 'u-link--Active', // 这是链接激活时的class
