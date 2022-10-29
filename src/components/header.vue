@@ -30,7 +30,7 @@ export default {
     font-style: normal;
     font-weight: 600;
     font-size: 18px;
-    color: #fff;
+    color: rgba(256,256,256,0.8);
 }
 .vote_time_wrap_two {
     width: 96vw;

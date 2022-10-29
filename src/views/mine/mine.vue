@@ -258,7 +258,7 @@ import HeaderView from '../../components/header'
             const {app:{_route:{query:{id,name}}}} = router
             this.name = name
             this.id = id
-            this.titleName = name + '累计票数'
+            this.titleName = name + '  累计票数'
             this.useopenid = localStorage.getItem('useopenid')
             this.getCustomerList()
 

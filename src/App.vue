@@ -37,7 +37,9 @@
             <div class="vote_rule_p">参与投票作品分为四个系列，</div>
             <div class="vote_rule_p">每个系列最多可投2个作品，</div>
             <div class="vote_rule_p">共计最多可投8个作品。</div>
-            <div class="rank" @click="handleRank">{{rankName}}<br />排名</div>
+            <div class="rank" v-if="rankName==='总'" @click="handleRank">{{rankName }}排名</div>
+            <div class="rank" v-else @click="handleRank">{{rankName }}<br />排名</div>
+
         </div>
 
         <div class="vote_time_wrap">
@@ -873,7 +875,8 @@ export default {
     }
 
     .rank {
-        position: absolute;
+        position: fixed;
+        z-index: 99;
         right: 2vw;
         width: 70px;
         height: 70px;
@@ -881,12 +884,13 @@ export default {
         font-family: 'PingFang SC';
         font-style: normal;
         font-weight: 700;
-        bottom: 0;
+        top: 440px;
         border-radius: 50%;
         display: flex;
         justify-content: center;
         align-items: center;
         text-align: center;
+        color: #4E87A3
     }
 }
 

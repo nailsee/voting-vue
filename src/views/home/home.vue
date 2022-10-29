@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <header-view v-bind="{statistics,name: '首页',titleName: '所有方案累计票数'}"/>
+        <header-view v-bind="{statistics,name: '首页',titleName: '所有方案  累计票数'}"/>
         <div class="home__card" v-for="item in detailList" :key="item.id">
             <img :src="item.logo"/>
             <div class="btn" @click="handleJump(item.id,item.type_name)">查看详情</div>
