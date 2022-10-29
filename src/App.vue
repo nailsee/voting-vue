@@ -37,7 +37,7 @@
             <div class="vote_rule_p">参与投票作品分为四个系列，</div>
             <div class="vote_rule_p">每个系列最多可投2个作品，</div>
             <div class="vote_rule_p">共计最多可投8个作品。</div>
-            <div class="rank" @click="handleRank">排名</div>
+            <div class="rank" @click="handleRank">{{rankName}}<br />排名</div>
         </div>
 
         <div class="vote_time_wrap">
@@ -71,60 +71,60 @@
         <!--  系列-->
 
         <!-- 内容 -->
-        <div class="main">
-            <div class="main-content" v-for="(item,index) in list" :key="item.id">
-                <div class="main-li">
+<!--        <div class="main">-->
+<!--            <div class="main-content" v-for="(item,index) in list" :key="item.id">-->
+<!--                <div class="main-li">-->
 
-                    <div class="main-top" @click="onDetails(item)">
-                        <p class="am-badge-danger">{{ item.id }}号</p>
-                        <p style="color: #5087a2;">{{ item.vote }}票</p>
-                    </div>
+<!--                    <div class="main-top" @click="onDetails(item)">-->
+<!--                        <p class="am-badge-danger">{{ item.id }}号</p>-->
+<!--                        <p style="color: #5087a2;">{{ item.vote }}票</p>-->
+<!--                    </div>-->
 
-                    <div class="main-li-img">
-                        <div class="main-li-img-cont">
-                            <img :src="item.file_url" alt="" @click="onDetails(item)">
+<!--                    <div class="main-li-img">-->
+<!--                        <div class="main-li-img-cont">-->
+<!--                            <img :src="item.file_url" alt="" @click="onDetails(item)">-->
 
-                            <!--							<div class="main-li-img-mask" v-if="item.is_checked">-->
-                            <!--								<van-icon name="checked" size="40px" color="#719db4" />-->
-                            <!--							</div>-->
-                        </div>
+<!--                            &lt;!&ndash;							<div class="main-li-img-mask" v-if="item.is_checked">&ndash;&gt;-->
+<!--                            &lt;!&ndash;								<van-icon name="checked" size="40px" color="#719db4" />&ndash;&gt;-->
+<!--                            &lt;!&ndash;							</div>&ndash;&gt;-->
+<!--                        </div>-->
 
 
-                    </div>
+<!--                    </div>-->
 
-                    <div class="main-bottom">
-                        <!-- <p>
-                            <i class="el-icon-star-off" style="color: #5087a2;" v-if="!item.is_vote"></i>
-                            <i class="el-icon-star-on" style="color: #5087a2;" v-else></i>
-                            <span style="color: #5087a2;">{{item.vote}}</span>
-                        </p>
-                        <el-button style="background: #5087a2;" type="danger" icon="el-icon-thumb" @click="vote(item)">
-                            投票
-                        </el-button> -->
-                        <template v-if="item.is_vote">
-                            <el-button style=" width: 100%; background: #5087a2;" type="danger"
-                                       @click="vote_complete(item)">已投票
-                            </el-button>
-                        </template>
-                        <template v-else>
-                            <template v-if="item.is_checked">
-                                <el-button style=" width: 100%; background: #5087a2;" type="danger"
-                                           @click="vote_cancel(item)">取消选中
-                                </el-button>
+<!--                    <div class="main-bottom">-->
+<!--                        &lt;!&ndash; <p>-->
+<!--                            <i class="el-icon-star-off" style="color: #5087a2;" v-if="!item.is_vote"></i>-->
+<!--                            <i class="el-icon-star-on" style="color: #5087a2;" v-else></i>-->
+<!--                            <span style="color: #5087a2;">{{item.vote}}</span>-->
+<!--                        </p>-->
+<!--                        <el-button style="background: #5087a2;" type="danger" icon="el-icon-thumb" @click="vote(item)">-->
+<!--                            投票-->
+<!--                        </el-button> &ndash;&gt;-->
+<!--                        <template v-if="item.is_vote">-->
+<!--                            <el-button style=" width: 100%; background: #5087a2;" type="danger"-->
+<!--                                       @click="vote_complete(item)">已投票-->
+<!--                            </el-button>-->
+<!--                        </template>-->
+<!--                        <template v-else>-->
+<!--                            <template v-if="item.is_checked">-->
+<!--                                <el-button style=" width: 100%; background: #5087a2;" type="danger"-->
+<!--                                           @click="vote_cancel(item)">取消选中-->
+<!--                                </el-button>-->
 
-                            </template>
-                            <template v-else>
-                                <el-button style=" width: 100%; background: #5087a2;" type="danger"
-                                           @click="onCheckVote(item)">投票
-                                </el-button>
-                            </template>
-                        </template>
+<!--                            </template>-->
+<!--                            <template v-else>-->
+<!--                                <el-button style=" width: 100%; background: #5087a2;" type="danger"-->
+<!--                                           @click="onCheckVote(item)">投票-->
+<!--                                </el-button>-->
+<!--                            </template>-->
+<!--                        </template>-->
 
-                    </div>
-                </div>
-            </div>
-            <!-- <van-pagination v-model="currentPage" :page-count="12" mode="simple" /> -->
-        </div>
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; <van-pagination v-model="currentPage" :page-count="12" mode="simple" /> &ndash;&gt;-->
+<!--        </div>-->
         <router-view></router-view>
 
         <!-- 活动规则 -->
@@ -148,16 +148,17 @@
 
             </div>
         </van-popup>
+<!--        :title="name +'排名'"-->
+
         <el-drawer
             :visible.sync="rankShow"
-            :title="name +'排名'"
             class="card-body"
             size="95%"
             direction="btt"
 
             :before-close="handleClose">
             <div class="card-box" v-loading.fullscreen.lock="rankLoading">
-                <!--                <el-divider class="divider">所有排名</el-divider>-->
+                                <el-divider class="divider">{{ name }}排名</el-divider>
                 <div class="card" v-for="(item, index) in rankList" :key="index">
                     <div class="card__img-box"><img :src="item.file_url"/></div>
                     <div class="card__content">
@@ -196,18 +197,18 @@
 
         <!--            </div>-->
         <!--        </van-popup>-->
-        <div class="footer_wrap" v-if="checkList.length">
-            <div class="footer_wleft">
-                已选
-                <div v-for="item in checkList" :key="item.id">
-                    <img :src="item.file_url" alt=""/>
-                </div>
-            </div>
-            <div class="footer_wcenter">
-                <div class="footer_wcsolid"></div>
-            </div>
-            <div class="footer_wright" @click="onSubmit">提交投票</div>
-        </div>
+<!--        <div class="footer_wrap" v-if="checkList.length">-->
+<!--            <div class="footer_wleft">-->
+<!--                已选-->
+<!--                <div v-for="item in checkList" :key="item.id">-->
+<!--                    <img :src="item.file_url" alt=""/>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="footer_wcenter">-->
+<!--                <div class="footer_wcsolid"></div>-->
+<!--            </div>-->
+<!--            <div class="footer_wright" @click="onSubmit">提交投票</div>-->
+<!--        </div>-->
 
     </div>
 </template>
@@ -256,7 +257,8 @@ export default {
             rankVote: 0,
             rankLoading: false,
             id: undefined,
-            name: '所有'
+            name: '所有',
+            rankName: '总',
 
         }
     },
@@ -588,9 +590,12 @@ export default {
             if(!to.query.id) {
                 this.id = undefined
                 this.name = '所有'
+                this.rankName = '总'
             }else {
                 this.id = to.query.id
                 this.name = to.query.name
+                this.rankName = to.query.name
+
             }
 
             // this.$forceUpdate()
@@ -870,17 +875,18 @@ export default {
     .rank {
         position: absolute;
         right: 2vw;
-        width: 60px;
-        height: 60px;
+        width: 70px;
+        height: 70px;
         background: rgba(129, 167, 255, 0.16);
         font-family: 'PingFang SC';
         font-style: normal;
         font-weight: 500;
-        top: 0;
+        bottom: 0;
         border-radius: 50%;
         display: flex;
         justify-content: center;
         align-items: center;
+        text-align: center;
     }
 }
 
@@ -1127,7 +1133,7 @@ export default {
 
 .card-body {
     & /deep/ .el-drawer__header {
-        margin-bottom: 10px;
+        margin-bottom: 0px;
         span {
             font-size: 20px;
             color: #818181;
