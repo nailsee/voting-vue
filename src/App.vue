@@ -172,7 +172,7 @@
                         <div class="card__top">
                             <div>
                                 <span class="no">NO.{{ index+1 }}</span>
-                                <span class="name">作品{{ item.type }}-{{item.id}}</span>
+                                <span class="name">{{ item.type }}-{{item.name}}</span>
                             </div>
                             <div>({{ item.vote }}票)</div>
                         </div>

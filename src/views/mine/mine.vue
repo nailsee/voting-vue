@@ -6,7 +6,7 @@
         <div class="main-content" v-for="(item,index) in list" :key="item.id">
             <div class="main-li">
                 <div class="main-top" @click="onDetails(item)">
-                    <p class="am-badge-danger">{{ item.type }}-{{ item.id }}</p>
+                    <p class="am-badge-danger">{{ item.type }}-{{ item.name }}</p>
                     <p style="color: #5087a2;">{{ item.vote }}票</p>
                 </div>
 
@@ -54,7 +54,7 @@
         <van-popup closeable v-model="show">
             <div class="votedet_wrap">
                 <div class="votedet_top">
-                    <div class="votedet_tleft">作品<span>{{ voteDetail.type }}-{{ voteDetail.id }}</span></div>
+                    <div class="votedet_tleft"><span>{{ voteDetail.type }}-{{ voteDetail.name }}</span></div>
                     <div class="votedet_tright">
                         {{ voteDetail.vote }}
                         <div class="votedet_trd">票</div>

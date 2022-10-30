@@ -2,9 +2,9 @@
     <div class="home">
         <header-view v-bind="{statistics,name: '首页',titleName: '所有方案  累计票数'}"/>
         <div class="home__card" v-for="item in detailList" :key="item.id">
+            <div class="type">{{ item.type_name }}</div>
             <img :src="item.logo"/>
             <div class="btn" @click="handleJump(item.id,item.type_name)">查看详情</div>
-            <div class="type">{{ item.type_name }}</div>
         </div>
     </div>
 </template>
@@ -75,7 +75,7 @@ export default {
 
     &__card {
         border: 1px solid #A5C7D5;
-        height: 200px;
+        //height: 200px;
         padding: 5px;
         margin-bottom: 10px;
         position: relative;
@@ -99,8 +99,8 @@ export default {
         }
 
         .type {
-            position: absolute;
-            width: 116px;
+            //position: absolute;
+            //width: 116px;
             height: 38px;
             font-family: 'PingFang SC';
             font-style: normal;
@@ -111,9 +111,9 @@ export default {
             color: #4E87A3;
             background: #F2F6FF;
             border-radius: 0px 0px 6px 6px;
-            top: 5px;
-            left: 50%;
-            transform: translateX(-50%);
+            //top: 5px;
+            //left: 50%;
+            //transform: translateX(-50%);
 
         }
     }
