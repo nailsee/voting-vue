@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="route">{{ name }}</div>
+<!--        <div class="route">{{ name }}</div>-->
         <div class="vote_time_wrap_two">
             <p class="vote_time_wrap_tp">{{ titleName }}</p>
             <p>{{ statistics }}</p>

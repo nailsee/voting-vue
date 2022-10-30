@@ -127,6 +127,11 @@
 <!--            </div>-->
 <!--            &lt;!&ndash; <van-pagination v-model="currentPage" :page-count="12" mode="simple" /> &ndash;&gt;-->
 <!--        </div>-->
+        <div class="route">
+            <span v-for="(item,index) in routerList" @click="handleJump(item.id,item.type_name)"  :class="{active: item.id == id}" :key="item.type_name">
+                {{item.type_name == '所有' ? '首页' : item.type_name}}
+            </span>
+        </div>
         <router-view></router-view>
 
         <!-- 活动规则 -->
@@ -220,6 +225,7 @@
 import axios from "../utils/request.js"
 import {publicMethod} from '../utils/pubilc'
 import {isWXBrowser, getWechatCode, getUrlCode, isWechat} from "../utils/common";
+import {router} from "./main";
 // import rankView from '../rank/rank'
 
 export default {
@@ -261,10 +267,18 @@ export default {
             id: undefined,
             name: '所有',
             rankName: '总',
-
+            routerList: [],
+            active: undefined, //默认首页选中
         }
     },
     methods: {
+        handleJump(id, name) {
+            if(!id) {
+                router.push({path: `/home`})
+                return
+            }
+            router.push({path: `/mine`, query: {id, name}})
+        },
         handleRank() {
             try {
                 this.rankLoading = true
@@ -580,6 +594,21 @@ export default {
                 // 拿到code之后就要范湖给后台 让后台返回对应的account_token和openid,尽量使用account_token 这个的刷新时间是两个小时，openid暴露出来不太好,拿到token之后就处理相关的业务逻辑
             }
         }
+        try {
+            axios.post('/typeList', {}).then(res => {
+                console.log(res.data)
+                if (res.data.code == 0) {
+                    if(Array.isArray(res.data.data)) {
+                        this.routerList = [{id: undefined, type_name: '所有',}].concat(res.data.data)
+                    }
+                }
+            }).catch(res => {
+                console.log(res, 'res')
+            })
+        }catch (e) {
+
+        }
+
     },
     created() {
 
@@ -601,7 +630,7 @@ export default {
             }
 
             // this.$forceUpdate()
-            console.log(to,to.query,this.id,this.name,'tttttt','----');
+            // console.log(to,to.query,this.id,this.name,'tttttt','----');
         }
     },
 }
@@ -880,7 +909,7 @@ export default {
         right: 2vw;
         width: 70px;
         height: 70px;
-        background: rgba(129, 167, 255, 0.16);
+        background: #F2F6FF;
         font-family: 'PingFang SC';
         font-style: normal;
         font-weight: 700;
@@ -1155,6 +1184,28 @@ export default {
     .divider /deep/ .el-divider__text {
         font-size: 20px;
         color: #818181;
+    }
+}
+.route {
+    height: 50px;
+    width: 96vw;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 50px;
+    margin-bottom: 20px;
+    font-family: 'PingFang SC';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 17px;
+    display: flex;
+    background: #F2F6FF;
+    color: #4E87A3;
+    span {
+        flex: 1;
+        &.active {
+            background: #4E87A3;
+            color: rgba(256,256,256,0.8);
+        }
     }
 }
 </style>

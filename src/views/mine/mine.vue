@@ -251,8 +251,7 @@ import HeaderView from '../../components/header'
             },
 		},
         mounted() {
-
-            // console.log(id,name)
+            console.log(this.id,this.name,'---------+++++++')
         },
         beforeMount() {
             const {app:{_route:{query:{id,name}}}} = router
@@ -262,6 +261,14 @@ import HeaderView from '../../components/header'
             this.useopenid = localStorage.getItem('useopenid')
             this.getCustomerList()
 
+        },
+        watch: {
+            $route(to,from){
+                this.name = to.query.name
+                this.id = to.query.id
+                this.titleName = to.query.name + '  累计票数'
+                this.getCustomerList()
+            }
         }
     }
 </script>
